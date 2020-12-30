@@ -1,0 +1,35 @@
+from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+import time
+
+class GgBot:
+    def __init__(self, username, passw, text):
+        self.driver = webdriver.Chrome('E:\programming\my-app\src\chromedriver.exe')
+        self.driver.get("https://www.gg.pl/")
+        time.sleep(1)
+        self.driver.find_element_by_xpath("/html/body/div[8]/div/div[2]/span").click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("/html/body/header/div[1]/div/div/div[2]/a[2]").click()
+        time.sleep(4)
+        self.driver.switch_to.frame('login-iframe')
+        self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/input").send_keys(passw)
+        time.sleep(4)
+        self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[1]/input").send_keys(username)
+        time.sleep(3)
+        self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[4]/button").click()
+        time.sleep(2)
+
+        #sending message
+        self.driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[1]/div/div/ul/li[4]/a/strong").click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath('/html/body/div[1]/div[4]/div[2]/div/div[2]/div/div[1]/div[6]/div/label/input').click() #szukanie
+        time.sleep(8)
+        self.driver.find_element_by_xpath('/html/body/div[1]/div[4]/div[2]/div/div[2]/div/div[1]/div[8]/div[1]/label/input').click() #rozmowa
+        time.sleep(4)
+        self.driver.find_element_by_id("chat-text").send_keys(text)
+        time.sleep(6)
+        self.driver.find_element_by_class_name("send-btn").click()
+        time.sleep(5)
+      
+GgBot()
+# in GgBot you have to put your - username, password, and text you want to send
